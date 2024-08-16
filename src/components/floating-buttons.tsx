@@ -27,6 +27,7 @@ export function FloatingButtons() {
             "mb-[2px] transition-all opacity-100",
             isOpen ? "" : "translate-x-[170px] opacity-0 -z-10"
           )}
+          onClick={() => setMenu(menu === "task" ? "" : "task")}
         >
           <p
             className={cn(
@@ -45,7 +46,6 @@ export function FloatingButtons() {
                 : "bg-white/95"
             )}
             size={menu === "task" ? "icon" : "icon2"}
-            onClick={() => setMenu(menu === "task" ? "" : "task")}
           >
             <Icons.reader
               className={cn(
@@ -60,6 +60,7 @@ export function FloatingButtons() {
             "mb-[2px] transition-all opacity-100",
             isOpen ? "" : "translate-x-[87px] opacity-0 -z-10"
           )}
+          onClick={() => setMenu(menu === "inbox" ? "" : "inbox")}
         >
           <p
             className={cn(
@@ -78,7 +79,6 @@ export function FloatingButtons() {
                 : "bg-white/95"
             )}
             size={menu === "inbox" ? "icon" : "icon2"}
-            onClick={() => setMenu(menu === "inbox" ? "" : "inbox")}
           >
             <Icons.message
               className={cn(

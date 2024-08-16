@@ -1,14 +1,18 @@
 import { Container } from "@/components/container";
 import { FloatingButtons } from "@/components/floating-buttons";
+import { SectionWrapper } from "@/components/section-wrapper";
+import { InboxProvider } from "@/context/InboxContext";
 import { MenuProvider } from "@/context/MenuContext";
 
 export default function Home() {
   return (
     <MenuProvider>
-      <section className="w-full h-full relative">
-        <Container />
+      <SectionWrapper>
+        <InboxProvider>
+          <Container />
+        </InboxProvider>
         <FloatingButtons />
-      </section>
+      </SectionWrapper>
     </MenuProvider>
   );
 }
