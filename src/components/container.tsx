@@ -6,7 +6,7 @@ import { AnimatePresence } from "framer-motion";
 import { Inbox } from "./inbox";
 import { Task } from "./task";
 import { ChatRoom } from "./chat-room";
-import { InboxProvider, useInbox } from "@/context/InboxContext";
+import { useInbox } from "@/context/InboxContext";
 
 export function Container() {
   const { menu } = useMenu();

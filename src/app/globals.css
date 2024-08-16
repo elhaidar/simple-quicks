@@ -21,6 +21,7 @@
     --destructive: 0 79% 63%;
     --destructive-foreground: 210 40% 98%;
     --border: 0 0% 51%;
+    --border-secondary: 0 0% 74%;
     --input: 0 0% 51%;
     --ring: 214 84% 56%;
     --radius: 0.5rem;
@@ -31,6 +32,19 @@
     --chart-5: 27 87% 67%;
     --indicator-1: 32 91% 70%;
     --indicator-2: 241 100% 76%;
+    --chats-1: 40 87% 91%;
+    --chats-1-foreground: 36 76% 58%;
+    --chats-2: 271 100% 93%;
+    --chats-2-foreground: 271 70% 60%;
+    --chats-3: 165 55% 89%;
+    --chats-3-foreground: 158 46% 49%;
+    --stickers-1: 213 100% 96%;
+    --stickers-2: 29 96% 82%;
+    --stickers-3: 42 82% 87%;
+    --stickers-4: 164 60% 80%;
+    --stickers-5: 109 63% 85%;
+    --stickers-6: 241 78% 89%;
+    --stickers-7: 292 88% 94%;
   }
   /* 
   :root {

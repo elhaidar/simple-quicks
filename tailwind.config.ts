@@ -24,6 +24,7 @@ const config = {
       },
       colors: {
         border: "hsl(var(--border))",
+        "border-secondary": "hsl(var(--border-secondary))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
@@ -58,6 +59,23 @@ const config = {
         },
         indicator1: "hsl(var(--indicator-1))",
         indicator2: "hsl(var(--indicator-2))",
+        stickers: {
+          1: "hsl(var(--sticker-1))",
+          2: "hsl(var(--sticker-2))",
+          3: "hsl(var(--sticker-3))",
+          4: "hsl(var(--sticker-4))",
+          5: "hsl(var(--sticker-5))",
+          6: "hsl(var(--sticker-6))",
+          7: "hsl(var(--sticker-7))",
+        },
+        chats: {
+          1: "hsl(var(--chats-1))",
+          "1-foreground": "hsl(var(--chats-1-foreground))",
+          2: "hsl(var(--chats-2))",
+          "2-foreground": "hsl(var(--chats-2-foreground))",
+          3: "hsl(var(--chats-3))",
+          "3-foreground": "hsl(var(--chats-3-foreground))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

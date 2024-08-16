@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { useInbox } from "@/context/InboxContext";
+import { ChatRoomContent } from "./chat-room-content";
+import { useMenu } from "@/context/MenuContext";
 
 interface TaskProps extends MotionProps {}
 
@@ -14,6 +16,7 @@ export function ChatRoom({ ...props }: TaskProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   const { setSelectedRoom } = useInbox();
+  const { setMenu } = useMenu();
 
   useEffect(() => {
     setTimeout(() => setIsLoading(false), 1000);
@@ -27,10 +30,10 @@ export function ChatRoom({ ...props }: TaskProps) {
       exit={{ opacity: 0, scale: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "bg-white w-full h-[80%] max-h-dvh md:h-[737px] overflow-y-auto absolute bottom-[110px] rounded-[6px] py-5 origin-bottom-right"
+        "bg-white w-full h-[80%] max-h-dvh md:h-[737px] overflow-y-auto absolute bottom-[110px] rounded-[6px] pb-5 origin-bottom-right"
       )}
     >
-      <div className="flex gap-4 items-center px-6">
+      <div className="flex gap-4 items-center px-6 bg-white z-[10] sticky top-0 py-5 border-b-[2px] border-secondary">
         <Button
           variant={"icon"}
           size={"icon24"}
@@ -44,17 +47,21 @@ export function ChatRoom({ ...props }: TaskProps) {
           </h3>
           <p className="text-xs font-bold">3 Participants</p>
         </div>
-        <Button className="ml-auto" variant={"icon"} size={"icon24"}>
+        <Button
+          className="ml-auto"
+          variant={"icon"}
+          size={"icon24"}
+          onClick={() => setMenu("")}
+        >
           <X />
         </Button>
       </div>
-      <hr className="border-[1px] border-secondary my-4" />
       {isLoading ? (
         <div className="flex justify-center items-center my-auto h-full -mt-12">
           <Loader text={"Loading Chats..."} />
         </div>
       ) : (
-        <div>Content goes here...</div> // Replace this with your actual content
+        <ChatRoomContent />
       )}
     </motion.div>
   );
