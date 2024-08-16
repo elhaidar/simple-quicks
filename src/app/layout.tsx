@@ -27,7 +27,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <main className="flex-1 max-w-screen-[734px] container px-[32px] py-[24px]">
+        <main className="flex-1 max-w-[734px] ml-auto px-[32px] py-[24px] h-screen">
           {children}
         </main>
       </body>
