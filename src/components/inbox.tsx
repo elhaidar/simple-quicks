@@ -4,6 +4,7 @@ import { Input } from "./ui/input";
 import { Icons } from "./icons";
 import Loader from "./loader";
 import { InboxContent } from "./inbox-content";
+import { SearchChat } from "./search-chat";
 
 interface InboxProps extends MotionProps {
   isLoading: boolean;
@@ -21,20 +22,13 @@ export function Inbox({ isLoading, ...props }: InboxProps) {
         "bg-white w-full h-[80%] max-h-dvh md:h-[737px] overflow-y-auto absolute bottom-[110px] rounded-[6px] pb-6 origin-bottom-right"
       )}
     >
-      <div className="flex justify-between items-center bg-white z-[10] sticky top-0 py-6 px-8">
-        <Input
-          type="text"
-          placeholder="Search"
-          className="px-16 placeholder:text-foreground"
-        />
-        <Icons.search className="fill-foreground absolute right-16" />
-      </div>
+      <SearchChat />
       {isLoading ? (
-        <div className="flex justify-center items-center my-auto -mt-8 h-full">
+        <div className="flex justify-center items-center my-auto h-[80%]">
           <Loader text={"Loading Chats..."} />
         </div>
       ) : (
-        <div className="px-8">
+        <div className="px-8 h-[80%]">
           <InboxContent />
         </div>
       )}

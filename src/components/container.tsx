@@ -11,14 +11,13 @@ import { Chat } from "@/schemas/chat";
 
 interface ContainerProps {
   chats: Chat[];
-  initialLoading: boolean;
 }
 
-export function Container({ chats, initialLoading }: ContainerProps) {
+export function Container({ chats }: ContainerProps) {
   const { menu } = useMenu();
   const { setChats } = useInbox();
   const { selectedRoom, setSelectedRoom } = useInbox();
-  const [isLoading, setIsLoading] = useState(initialLoading);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setChats(chats);

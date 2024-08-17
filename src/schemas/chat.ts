@@ -19,6 +19,7 @@ export interface Message {
 export interface Participant {
   userId: string;
   username: string;
+  displayName: string;
   avatarUrl: string;
   role?: string;
 }

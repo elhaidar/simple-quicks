@@ -4,15 +4,16 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import { InboxProvider } from "@/context/InboxContext";
 import { MenuProvider } from "@/context/MenuContext";
 
-let isLoading = true;
-
 async function getChats() {
-  const response = await fetch("http://localhost:3001/chats", {
-    cache: "no-store",
-  });
-  const data = await response.json();
-  isLoading = false;
-  return data;
+  try {
+    const response = await fetch("http://localhost:3001/chats", {
+      cache: "no-store",
+    });
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    return [];
+  }
 }
 
 export default async function Home() {
@@ -22,7 +23,7 @@ export default async function Home() {
     <MenuProvider>
       <SectionWrapper>
         <InboxProvider>
-          <Container chats={chats} initialLoading={isLoading} />
+          <Container chats={chats} />
         </InboxProvider>
         <FloatingButtons />
       </SectionWrapper>

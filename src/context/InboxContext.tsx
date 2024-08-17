@@ -8,6 +8,8 @@ interface InboxContextType {
   setSelectedRoom: React.Dispatch<React.SetStateAction<string | null>>;
   chats: Chat[];
   setChats: React.Dispatch<React.SetStateAction<Chat[]>>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const InboxContext = createContext<InboxContextType | undefined>(undefined);
@@ -15,10 +17,18 @@ const InboxContext = createContext<InboxContextType | undefined>(undefined);
 export const InboxProvider = ({ children }: { children: ReactNode }) => {
   const [selectedRoom, setSelectedRoom] = useState<string | null>("");
   const [chats, setChats] = useState<Chat[]>([]);
+  const [search, setSearch] = useState<string>("");
 
   return (
     <InboxContext.Provider
-      value={{ selectedRoom, setSelectedRoom, chats, setChats }}
+      value={{
+        selectedRoom,
+        setSelectedRoom,
+        chats,
+        setChats,
+        search,
+        setSearch,
+      }}
     >
       {children}
     </InboxContext.Provider>

@@ -1,4 +1,4 @@
-import { Chat, Message } from "@/schemas/chat";
+import { Chat, Message, Participant } from "@/schemas/chat";
 import { formatInTimeZone } from "date-fns-tz";
 
 export function findLatestMessage(messages: Message[]) {
@@ -37,4 +37,20 @@ export function sortChatsByLatestMessage(chats: Chat[]): Chat[] {
       new Date(getLatestTimestamp(b)).getTime() -
       new Date(getLatestTimestamp(a)).getTime()
   );
+}
+
+export function getChatCounterpart(
+  chat: Chat,
+  currentUserId: string
+): Participant | Participant[] | undefined {
+  if (chat.type === "personal") {
+    return chat.participants.find(
+      (participant) => participant.userId !== currentUserId
+    );
+  } else if (chat.type === "group") {
+    return chat.participants.filter(
+      (participant) => participant.userId !== currentUserId
+    );
+  }
+  return undefined;
 }
