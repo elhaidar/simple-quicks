@@ -1,5 +1,3 @@
-"use client";
-
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "framer-motion";
 import { Input } from "./ui/input";

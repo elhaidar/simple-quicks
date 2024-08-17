@@ -4,12 +4,25 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import { InboxProvider } from "@/context/InboxContext";
 import { MenuProvider } from "@/context/MenuContext";
 
-export default function Home() {
+let isLoading = true;
+
+async function getChats() {
+  const response = await fetch("http://localhost:3001/chats", {
+    cache: "no-store",
+  });
+  const data = await response.json();
+  isLoading = false;
+  return data;
+}
+
+export default async function Home() {
+  const chats = await getChats();
+
   return (
     <MenuProvider>
       <SectionWrapper>
         <InboxProvider>
-          <Container />
+          <Container chats={chats} initialLoading={isLoading} />
         </InboxProvider>
         <FloatingButtons />
       </SectionWrapper>

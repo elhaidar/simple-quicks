@@ -49,7 +49,7 @@ export function FloatingButtons() {
           >
             <Icons.reader
               className={cn(
-                "w-6 h-6 fill-indicator1",
+                "w-6 h-6 fill-indicators-1",
                 menu === "task" && "fill-white"
               )}
             />
@@ -82,7 +82,7 @@ export function FloatingButtons() {
           >
             <Icons.message
               className={cn(
-                "w-6 h-6 fill-indicator2",
+                "w-6 h-6 fill-indicators-2",
                 menu === "inbox" && "fill-white"
               )}
             />

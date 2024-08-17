@@ -1,23 +1,52 @@
 import { Ellipsis } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { cn } from "@/lib/utils";
 
-export function BubbleChat() {
+interface BubbleChatProps {
+  variant?: "left" | "right";
+  color?: string;
+}
+
+export function BubbleChat({ variant = "left", color }: BubbleChatProps) {
   return (
-    <div className="flex flex-col gap-1">
-      <p className="text-sm font-bold text-chats-1-foreground">Mary Hilda</p>
-      <div className="flex gap-2">
-        <div className="p-[10px] bg-chats-1 rounded-md max-w-[518px]">
+    <div
+      className={cn("flex flex-col gap-1", variant === "right" && "items-end")}
+    >
+      <p
+        className={cn(
+          "text-sm font-bold text-chats-1-foreground",
+          variant === "right" && "text-right text-chats-2-foreground",
+          color && `text-${color}-foreground`
+        )}
+      >
+        Mary Hilda
+      </p>
+      <div
+        className={cn("flex gap-2", variant === "right" && "flex-row-reverse")}
+      >
+        <div
+          className={cn(
+            "p-[10px] bg-chats-1 rounded-md max-w-[518px]",
+            variant === "right" && "bg-chats-2",
+            color && `bg-${color}`
+          )}
+        >
           <p className="text-sm mb-1">
-            Hello Obaidullah, I will be your case advisor for case #029290. I
-            have assigned some homework for you to fill. Please keep up with the
-            due dates. Should you have any questions, you can message me
-            anytime. Thanks.
+            Lorem ipsum dolor sit amet, consectetur
           </p>
           <time className="text-xs">19:00</time>
         </div>
         <Popover>
-          <PopoverTrigger asChild>
+          <PopoverTrigger
+            asChild
+            className={cn(
+              "sticky",
+              variant === "left"
+                ? "left-[50%] right-auto"
+                : "right-[50%] left-auto"
+            )}
+          >
             <Button variant="icon" size="icon16">
               <Ellipsis />
             </Button>
@@ -25,7 +54,10 @@ export function BubbleChat() {
           <PopoverContent className="w-[126px] p-0 border-border-secondary">
             <div className="flex flex-col items-start rounded-none">
               <Button
-                className="text-base text-primary w-full flex justify-start border-b-[1px] border-border-secondary"
+                className={cn(
+                  "text-base text-primary w-full flex justify-start border-b-[1px] border-border-secondary",
+                  variant === "left" && "hidden"
+                )}
                 variant="ghost-secondary"
                 size="sm"
               >

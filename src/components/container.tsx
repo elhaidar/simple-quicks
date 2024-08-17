@@ -7,11 +7,22 @@ import { Inbox } from "./inbox";
 import { Task } from "./task";
 import { ChatRoom } from "./chat-room";
 import { useInbox } from "@/context/InboxContext";
+import { Chat } from "@/schemas/chat";
 
-export function Container() {
+interface ContainerProps {
+  chats: Chat[];
+  initialLoading: boolean;
+}
+
+export function Container({ chats, initialLoading }: ContainerProps) {
   const { menu } = useMenu();
+  const { setChats } = useInbox();
   const { selectedRoom, setSelectedRoom } = useInbox();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(initialLoading);
+
+  useEffect(() => {
+    setChats(chats);
+  }, [chats, setChats]);
 
   useEffect(() => {
     if (menu) {
@@ -24,7 +35,7 @@ export function Container() {
     return () => {
       setSelectedRoom(null);
     };
-  }, [menu]);
+  }, [menu, setSelectedRoom]);
 
   return (
     <AnimatePresence>
