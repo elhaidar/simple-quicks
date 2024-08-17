@@ -1,13 +1,10 @@
 import { Chat } from "@/schemas/chat";
 import { Icons } from "./icons";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import {
-  findLatestMessage,
-  findUndreadMessage,
-  formatDate,
-} from "@/lib/chatHelper";
+import { findLatestMessage, findUndreadMessage } from "@/lib/chatHelper";
 import { cn } from "@/lib/utils";
 import { USER_ID } from "@/lib/constant";
+import { formatDate } from "@/lib/dateHelper";
 
 interface PersonalChatItemProps {
   data: Chat;

@@ -13,14 +13,6 @@ export function findUndreadMessage(messages: Message[]) {
   return messages.some((message) => !message.isRead);
 }
 
-export function formatDate(timestamp: string) {
-  return formatInTimeZone(
-    new Date(timestamp),
-    "Asia/Jakarta",
-    "dd/MM/yyyy HH:mm"
-  );
-}
-
 export function getLatestTimestamp(chat: Chat): string {
   const latestMessage = chat.messages.reduce((latest, message) => {
     return new Date(message.timestamp) > new Date(latest.timestamp)
@@ -53,4 +45,23 @@ export function getChatCounterpart(
     );
   }
   return undefined;
+}
+
+export function getBubbleColor(
+  senderId: string,
+  userId: string,
+  participants: Participant[]
+) {
+  if (senderId === userId) {
+    return "chats-3";
+  }
+
+  const otherParticipants = participants.filter(
+    (participant) => participant.userId !== userId
+  );
+
+  const otherIndex = otherParticipants.findIndex(
+    (participant) => participant.userId === senderId
+  );
+  return `chats-${(otherIndex % 2) + 1}`;
 }

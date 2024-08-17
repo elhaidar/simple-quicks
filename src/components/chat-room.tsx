@@ -104,13 +104,20 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
         </Button>
       </div>
       <div className="flex flex-col px-6 py-2 w-full">
-        <ChatRoomContent />
+        <ChatRoomContent chat={chat} />
         <motion.div
           ref={chatEndRef}
           onViewportEnter={newMessageOnViewportEnter}
         />
       </div>
-      <div className="sticky bottom-0 w-full">
+      <div
+        className={cn(
+          "absolute bottom-0 w-full",
+          (chat?.messages?.length || 0) >= 5
+            ? "sticky"
+            : (chat?.messages?.length || 0) >= 3 && "max-[768px]:sticky"
+        )}
+      >
         {anyUnreadMessages && !isScrolledToBottom && (
           <div className="flex flex-col items-center mb-3">
             <Button

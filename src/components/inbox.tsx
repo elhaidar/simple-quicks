@@ -28,7 +28,7 @@ export function Inbox({ isLoading, ...props }: InboxProps) {
           <Loader text={"Loading Chats..."} />
         </div>
       ) : (
-        <div className="px-8 h-[80%]">
+        <div className="px-4 md:px-8 h-[80%]">
           <InboxContent />
         </div>
       )}

@@ -1,17 +1,21 @@
+import { formatDateWithDayName } from "@/lib/dateHelper";
 import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 interface ChatDayDividerProps extends React.HTMLAttributes<HTMLDivElement> {
-  datetime?: string;
+  date?: string;
   className?: string;
   variant?: "default" | "destructive";
 }
 
 export function ChatDayDivider({
-  datetime = "Today June 09, 2021",
+  date = "2021-09-06",
   className,
   variant = "default",
   ...props
 }: ChatDayDividerProps) {
+  const formattedDate = formatDateWithDayName(new Date(date));
+
   return (
     <div
       className={cn("flex justify-center items-center my-3", className)}
@@ -29,7 +33,7 @@ export function ChatDayDivider({
           variant === "destructive" && "text-destructive"
         )}
       >
-        {datetime}
+        {formattedDate}
       </div>
       <div
         className={cn(
