@@ -2,26 +2,68 @@
 
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "framer-motion";
-import Loader from "./loader";
-import { useEffect, useState } from "react";
 import { ArrowDown, ArrowLeft, X } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { useInbox } from "@/context/InboxContext";
 import { ChatRoomContent } from "./chat-room-content";
 import { useMenu } from "@/context/MenuContext";
 import { Input } from "./ui/input";
+import { Chat, Participant } from "@/schemas/chat";
+import { USER_ID } from "@/lib/constant";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { findUndreadMessage } from "@/lib/chatHelper";
 
-interface TaskProps extends MotionProps {}
+interface ChatRoomProps extends MotionProps {}
 
-export function ChatRoom({ ...props }: TaskProps) {
-  // const [isLoading, setIsLoading] = useState(true);
-
-  const { setSelectedRoom } = useInbox();
+export function ChatRoom({ ...props }: ChatRoomProps) {
+  const { selectedRoom, setSelectedRoom, chats, setChats } = useInbox();
   const { setMenu } = useMenu();
 
-  // useEffect(() => {
-  //   setTimeout(() => setIsLoading(false), 1000);
-  // }, []);
+  const [chat, setChat] = useState<Chat | undefined>(undefined);
+  const [isScrolledToBottom, setIsScrolledToBottom] = useState(false);
+
+  const chatEndRef = useRef<HTMLDivElement>(null);
+
+  let buddyChat: Participant | undefined;
+
+  if (chat?.type === "personal") {
+    buddyChat = chat.participants.find(
+      (participant) => participant.userId !== USER_ID
+    );
+  }
+
+  function scrollToBottom() {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  function newMessageOnViewportEnter() {
+    setIsScrolledToBottom(true);
+    const updatedChats = chats.map((chat) => {
+      if (chat.chatId === selectedRoom) {
+        return {
+          ...chat,
+          messages: chat.messages.map((message) => ({
+            ...message,
+            isRead: true,
+          })),
+        };
+      }
+      return chat;
+    });
+
+    setChats(updatedChats);
+  }
+
+  const anyUnreadMessages = useMemo(() => {
+    return findUndreadMessage(chat?.messages || []);
+  }, [chat]);
+
+  useEffect(() => {
+    if (selectedRoom) {
+      const selectedChat = chats.find((chat) => chat.chatId === selectedRoom);
+      setChat(selectedChat);
+    }
+  }, [selectedRoom, chats]);
 
   return (
     <motion.div
@@ -42,11 +84,15 @@ export function ChatRoom({ ...props }: TaskProps) {
         >
           <ArrowLeft />
         </Button>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 h-[44px] justify-center">
           <h3 className="font-bold text-primary">
-            I-589 - AMARKHIL, Obaidullah [Affirmative Filing with ZHN]
+            {chat?.groupName || buddyChat?.displayName || "-"}
           </h3>
-          <p className="text-xs font-bold">3 Participants</p>
+          {chat?.type === "group" && (
+            <p className="text-xs font-bold">{`${
+              chat?.participants?.length || 0
+            } Participants`}</p>
+          )}
         </div>
         <Button
           className="ml-auto"
@@ -57,26 +103,27 @@ export function ChatRoom({ ...props }: TaskProps) {
           <X />
         </Button>
       </div>
-      {/* {isLoading ? (
-        <div className="flex justify-center items-center my-auto h-full -mt-24">
-          <Loader text={"Loading Chats..."} />
-        </div>
-      ) : ( */}
       <div className="flex flex-col px-6 py-2 w-full">
         <ChatRoomContent />
+        <motion.div
+          ref={chatEndRef}
+          onViewportEnter={newMessageOnViewportEnter}
+        />
       </div>
-      {/* )} */}
       <div className="sticky bottom-0 w-full">
-        <div className="flex flex-col items-center mb-3">
-          <Button
-            className={cn(
-              buttonVariants({ variant: "primary" }),
-              "px-[12px] py-[8px]"
-            )}
-          >
-            New Message <ArrowDown className="ml-2 w-4 h-4" />
-          </Button>
-        </div>
+        {anyUnreadMessages && !isScrolledToBottom && (
+          <div className="flex flex-col items-center mb-3">
+            <Button
+              className={cn(
+                buttonVariants({ variant: "primary" }),
+                "px-[12px] py-[8px]"
+              )}
+              onClick={scrollToBottom}
+            >
+              New Message <ArrowDown className="ml-2 w-4 h-4" />
+            </Button>
+          </div>
+        )}
         <div className="flex items-center gap-2 w-full bg-white pb-5 px-6">
           <Input
             type="text"
