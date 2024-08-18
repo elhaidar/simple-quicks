@@ -1,0 +1,210 @@
+{
+  "chats": [
+    {
+      "chatId": "personal_1",
+      "type": "personal",
+      "participants": [
+        {
+          "userId": "user_1",
+          "username": "john_doe",
+          "displayName": "John Doe",
+          "avatarUrl": "https://example.com/avatars/john_doe.jpg"
+        },
+        {
+          "userId": "user_2",
+          "username": "jane_smith",
+          "displayName": "Jane Smith",
+          "avatarUrl": "https://example.com/avatars/jane_smith.jpg"
+        }
+      ],
+      "messages": [
+        {
+          "messageId": "msg_1",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Hi, how are you?",
+          "timestamp": "2024-08-17T10:30:00Z",
+          "isRead": false
+        },
+        {
+          "messageId": "msg_2",
+          "senderId": "user_2",
+          "senderName": "Jane Smith",
+          "content": "I'm good, thanks! How about you?",
+          "timestamp": "2024-08-17T10:31:00Z",
+          "isRead": false
+        }
+      ]
+    },
+    {
+      "chatId": "personal_2",
+      "type": "personal",
+      "participants": [
+        {
+          "userId": "user_1",
+          "username": "john_doe",
+          "displayName": "John Doe",
+          "avatarUrl": "https://example.com/avatars/john_doe.jpg"
+        },
+        {
+          "userId": "user_4",
+          "username": "obu",
+          "displayName": "Obu",
+          "avatarUrl": "https://example.com/avatars/obu.jpg"
+        }
+      ],
+      "messages": [
+        {
+          "messageId": "msg_1",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Hi, how are you?",
+          "timestamp": "2024-08-15T10:30:00Z",
+          "isRead": false
+        },
+        {
+          "messageId": "msg_2",
+          "senderId": "user_4",
+          "senderName": "Obu",
+          "content": "I'm good, thanks! How about you?",
+          "timestamp": "2024-08-16T10:31:00Z",
+          "isRead": false
+        },
+        {
+          "messageId": "msg_1",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Glad to hear that! I'm doing well too.",
+          "timestamp": "2024-08-16T10:33:00Z",
+          "isRead": false
+        }
+      ]
+    },
+    {
+      "chatId": "group_1",
+      "type": "group",
+      "groupName": "Project Team",
+      "groupAvatarUrl": "https://example.com/avatars/project_team.jpg",
+      "participants": [
+        {
+          "userId": "user_1",
+          "username": "john_doe",
+          "displayName": "John Doe",
+          "avatarUrl": "https://example.com/avatars/john_doe.jpg",
+          "role": "admin"
+        },
+        {
+          "userId": "user_2",
+          "username": "jane_smith",
+          "displayName": "Jane Smith",
+          "avatarUrl": "https://example.com/avatars/jane_smith.jpg",
+          "role": "member"
+        },
+        {
+          "userId": "user_3",
+          "username": "alice_jones",
+          "displayName": "Alice Jones",
+          "avatarUrl": "https://example.com/avatars/alice_jones.jpg",
+          "role": "member"
+        }
+      ],
+      "messages": [
+        {
+          "messageId": "msg_1",
+          "senderId": "user_3",
+          "senderName": "Alice Jones",
+          "content": "The meeting is at 5 PM.",
+          "timestamp": "2024-08-17T09:00:00Z",
+          "isRead": true
+        },
+        {
+          "messageId": "msg_2",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Got it, see you there!",
+          "timestamp": "2024-08-17T09:05:00Z",
+          "isRead": true
+        },
+        {
+          "messageId": "msg_3",
+          "senderId": "user_2",
+          "senderName": "Jane Smith",
+          "content": "I'll be there too.",
+          "timestamp": "2024-08-17T09:10:00Z",
+          "isRead": true
+        },
+        {
+          "messageId": "msg_4",
+          "senderId": "user_3",
+          "senderName": "Alice Jones",
+          "content": "Great, looking forward to it!",
+          "timestamp": "2024-08-17T09:15:00Z",
+          "isRead": true
+        },
+        {
+          "messageId": "msg_5",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Me too!",
+          "timestamp": "2024-08-17T09:20:00Z",
+          "isRead": true
+        },
+        {
+          "messageId": "msg_6",
+          "senderId": "user_2",
+          "senderName": "Jane Smith",
+          "content": "See you all there!",
+          "timestamp": "2024-08-17T09:25:00Z",
+          "isRead": false
+        }
+      ]
+    },
+    {
+      "chatId": "group_2",
+      "type": "group",
+      "groupName": "Project Team 2",
+      "groupAvatarUrl": "https://example.com/avatars/project_team.jpg",
+      "participants": [
+        {
+          "userId": "user_1",
+          "username": "john_doe",
+          "displayName": "John Doe",
+          "avatarUrl": "https://example.com/avatars/john_doe.jpg",
+          "role": "admin"
+        },
+        {
+          "userId": "user_2",
+          "username": "jane_smith",
+          "displayName": "Jane Smith",
+          "avatarUrl": "https://example.com/avatars/jane_smith.jpg",
+          "role": "member"
+        },
+        {
+          "userId": "user_3",
+          "username": "alice_jones",
+          "displayName": "Alice Jones",
+          "avatarUrl": "https://example.com/avatars/alice_jones.jpg",
+          "role": "member"
+        }
+      ],
+      "messages": [
+        {
+          "messageId": "msg_1",
+          "senderId": "user_3",
+          "senderName": "Alice Jones",
+          "content": "The meeting is at 3 PM.",
+          "timestamp": "2024-08-17T20:00:00Z",
+          "isRead": false
+        },
+        {
+          "messageId": "msg_2",
+          "senderId": "user_1",
+          "senderName": "John Doe",
+          "content": "Got it, see you there bud!",
+          "timestamp": "2024-08-17T20:05:00Z",
+          "isRead": false
+        }
+      ]
+    }
+  ]
+}
