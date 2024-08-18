@@ -24,7 +24,8 @@
           "senderName": "John Doe",
           "content": "Hi, how are you?",
           "timestamp": "2024-08-17T10:30:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         },
         {
           "messageId": "msg_2",
@@ -32,7 +33,8 @@
           "senderName": "Jane Smith",
           "content": "I'm good, thanks! How about you?",
           "timestamp": "2024-08-17T10:31:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         }
       ]
     },
@@ -60,7 +62,8 @@
           "senderName": "John Doe",
           "content": "Hi, how are you?",
           "timestamp": "2024-08-15T10:30:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         },
         {
           "messageId": "msg_2",
@@ -68,15 +71,17 @@
           "senderName": "Obu",
           "content": "I'm good, thanks! How about you?",
           "timestamp": "2024-08-16T10:31:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         },
         {
-          "messageId": "msg_1",
+          "messageId": "msg_3",
           "senderId": "user_1",
           "senderName": "John Doe",
           "content": "Glad to hear that! I'm doing well too.",
           "timestamp": "2024-08-16T10:33:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         }
       ]
     },
@@ -115,7 +120,8 @@
           "senderName": "Alice Jones",
           "content": "The meeting is at 5 PM.",
           "timestamp": "2024-08-17T09:00:00Z",
-          "isRead": true
+          "isRead": true,
+          "isEdited": false
         },
         {
           "messageId": "msg_2",
@@ -123,7 +129,8 @@
           "senderName": "John Doe",
           "content": "Got it, see you there!",
           "timestamp": "2024-08-17T09:05:00Z",
-          "isRead": true
+          "isRead": true,
+          "isEdited": false
         },
         {
           "messageId": "msg_3",
@@ -131,7 +138,8 @@
           "senderName": "Jane Smith",
           "content": "I'll be there too.",
           "timestamp": "2024-08-17T09:10:00Z",
-          "isRead": true
+          "isRead": true,
+          "isEdited": false
         },
         {
           "messageId": "msg_4",
@@ -139,7 +147,8 @@
           "senderName": "Alice Jones",
           "content": "Great, looking forward to it!",
           "timestamp": "2024-08-17T09:15:00Z",
-          "isRead": true
+          "isRead": true,
+          "isEdited": false
         },
         {
           "messageId": "msg_5",
@@ -147,7 +156,8 @@
           "senderName": "John Doe",
           "content": "Me too!",
           "timestamp": "2024-08-17T09:20:00Z",
-          "isRead": true
+          "isRead": true,
+          "isEdited": false
         },
         {
           "messageId": "msg_6",
@@ -155,7 +165,8 @@
           "senderName": "Jane Smith",
           "content": "See you all there!",
           "timestamp": "2024-08-17T09:25:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         }
       ]
     },
@@ -194,7 +205,8 @@
           "senderName": "Alice Jones",
           "content": "The meeting is at 3 PM.",
           "timestamp": "2024-08-17T20:00:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         },
         {
           "messageId": "msg_2",
@@ -202,7 +214,8 @@
           "senderName": "John Doe",
           "content": "Got it, see you there bud!",
           "timestamp": "2024-08-17T20:05:00Z",
-          "isRead": false
+          "isRead": false,
+          "isEdited": false
         }
       ]
     }
