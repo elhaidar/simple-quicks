@@ -37,7 +37,7 @@ export function PersonalChatItem({ data, index }: PersonalChatItemProps) {
           <h3 className="font-bold text-primary">
             {buddyChat?.displayName || "-"}
           </h3>
-          <time className="text-sm" dateTime={latestMessage?.timestamp}>
+          <time className="text-xs" dateTime={latestMessage?.timestamp}>
             {latestMessage?.timestamp
               ? formatDate(latestMessage.timestamp)
               : "-"}

@@ -10,7 +10,7 @@ import { USER_ID } from "@/lib/constant";
 export function InboxContent() {
   const { setSelectedRoom, chats, search } = useInbox();
 
-  const sortedChats = sortChatsByLatestMessage(chats);
+  const sortedChats = sortChatsByLatestMessage(chats || []);
 
   const searchedChats = useMemo(() => {
     if (!search) {

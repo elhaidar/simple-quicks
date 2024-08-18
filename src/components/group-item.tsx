@@ -32,7 +32,7 @@ export function GroupItem({ data, index }: GroupItemProps) {
       <div>
         <div className="flex items-center gap-4">
           <h3 className="font-bold text-primary">{data?.groupName || "-"}</h3>
-          <time className="text-sm" dateTime={latestMessage?.timestamp}>
+          <time className="text-xs" dateTime={latestMessage?.timestamp}>
             {latestMessage?.timestamp
               ? formatDate(latestMessage.timestamp)
               : "-"}

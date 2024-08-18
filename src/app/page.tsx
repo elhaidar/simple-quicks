@@ -6,10 +6,14 @@ import { MenuProvider } from "@/context/MenuContext";
 
 async function getChats() {
   try {
-    const response = await fetch("http://localhost:3001/chats", {
-      cache: "no-store",
-    });
-    const data = await response.json();
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/chat`,
+      {
+        cache: "no-store",
+        method: "GET",
+      }
+    );
+    const { data } = await response.json();
     return data;
   } catch (err) {
     return [];

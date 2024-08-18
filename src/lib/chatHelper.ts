@@ -1,5 +1,4 @@
 import { Chat, Message, Participant } from "@/schemas/chat";
-import { formatInTimeZone } from "date-fns-tz";
 
 export function findLatestMessage(messages: Message[]) {
   return messages.reduce((latest, message) => {
@@ -14,13 +13,13 @@ export function findUndreadMessage(messages: Message[]) {
 }
 
 export function getLatestTimestamp(chat: Chat): string {
-  const latestMessage = chat.messages.reduce((latest, message) => {
+  const latestMessage = chat?.messages?.reduce((latest, message) => {
     return new Date(message.timestamp) > new Date(latest.timestamp)
       ? message
       : latest;
   }, chat.messages[0]);
 
-  return latestMessage.timestamp;
+  return latestMessage?.timestamp;
 }
 
 export function sortChatsByLatestMessage(chats: Chat[]): Chat[] {

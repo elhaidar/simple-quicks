@@ -1,7 +1,5 @@
 import { cn } from "@/lib/utils";
 import { motion, MotionProps } from "framer-motion";
-import { Input } from "./ui/input";
-import { Icons } from "./icons";
 import Loader from "./loader";
 import { InboxContent } from "./inbox-content";
 import { SearchChat } from "./search-chat";

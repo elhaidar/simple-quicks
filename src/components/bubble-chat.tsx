@@ -30,7 +30,9 @@ export function BubbleChat({
         className={cn(
           "text-sm font-bold text-chats-1-foreground",
           variant === "right" && "text-right text-chats-3-foreground",
-          color && `text-${color}-foreground`
+          color === "chats-1" && "text-chats-2-foreground",
+          color === "chats-2" && "text-chats-1-foreground",
+          color === "chats-4" && "text-chats-4-foreground"
         )}
       >
         {variant === "right" ? "You" : message.senderName}
@@ -42,7 +44,9 @@ export function BubbleChat({
           className={cn(
             "p-[10px] bg-chats-1 rounded-md max-w-[518px]",
             variant === "right" && "bg-chats-3",
-            color && `bg-${color}`
+            color === "chats-1" && "bg-chats-2",
+            color === "chats-2" && "bg-chats-1",
+            color === "chats-4" && "bg-chats-4"
           )}
         >
           <p className="text-sm mb-1">{message.content}</p>
