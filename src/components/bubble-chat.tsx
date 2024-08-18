@@ -1,20 +1,27 @@
+"use client";
+
 import { Ellipsis } from "lucide-react";
 import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { cn } from "@/lib/utils";
 import { Message } from "@/schemas/chat";
 import { USER_ID } from "@/lib/constant";
+import { useInbox } from "@/context/InboxContext";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface BubbleChatProps {
   variant?: "left" | "right";
   color?: string;
   message: Message;
+  chatId: string;
 }
 
 export function BubbleChat({
   variant = "left",
   color,
   message,
+  chatId,
 }: BubbleChatProps) {
   const time = new Date(message.timestamp).toLocaleTimeString([], {
     hour: "2-digit",
@@ -22,9 +29,29 @@ export function BubbleChat({
     hourCycle: "h24",
   });
 
+  const { deleteMessage, setEditMessage } = useInbox();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  async function handleDelete() {
+    try {
+      const res = await fetch(`/api/chat/${chatId}/${message.messageId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete message");
+      deleteMessage(chatId, message.messageId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
-    <div
+    <motion.div
       className={cn("flex flex-col gap-1", variant === "right" && "items-end")}
+      exit={{
+        opacity: 0,
+        transformOrigin: "right",
+      }}
     >
       <p
         className={cn(
@@ -42,7 +69,7 @@ export function BubbleChat({
       >
         <div
           className={cn(
-            "p-[10px] bg-chats-1 rounded-md max-w-[518px]",
+            "p-[10px] bg-chats-1 rounded-md max-w-[518px] min-w-[100px]",
             variant === "right" && "bg-chats-3",
             color === "chats-1" && "bg-chats-2",
             color === "chats-2" && "bg-chats-1",
@@ -50,9 +77,12 @@ export function BubbleChat({
           )}
         >
           <p className="text-sm mb-1">{message.content}</p>
-          <time className="text-xs">{time}</time>
+          <div className="flex justify-between items-center gap-4">
+            <time className="text-xs">{time}</time>
+            {message.isEdited && <p className="text-xs">Edited</p>}
+          </div>
         </div>
-        <Popover>
+        <Popover open={isOpen}>
           <PopoverTrigger
             asChild
             className={cn(
@@ -62,7 +92,11 @@ export function BubbleChat({
                 : "right-[50%] left-auto"
             )}
           >
-            <Button variant="icon" size="icon16">
+            <Button
+              variant="icon"
+              size="icon16"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               <Ellipsis />
             </Button>
           </PopoverTrigger>
@@ -76,6 +110,10 @@ export function BubbleChat({
                   )}
                   variant="ghost-secondary"
                   size="sm"
+                  onClick={() => {
+                    setEditMessage(message);
+                    setIsOpen(false);
+                  }}
                 >
                   Edit
                 </Button>
@@ -84,6 +122,7 @@ export function BubbleChat({
                 className="text-base text-destructive w-full flex justify-start"
                 variant="ghost-secondary"
                 size="sm"
+                onClick={handleDelete}
               >
                 Delete
               </Button>
@@ -91,6 +130,6 @@ export function BubbleChat({
           </PopoverContent>
         </Popover>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -40,15 +40,17 @@ export function PersonalChatItem({ data, index }: PersonalChatItemProps) {
           <time className="text-xs" dateTime={latestMessage?.timestamp}>
             {latestMessage?.timestamp
               ? formatDate(latestMessage.timestamp)
-              : "-"}
+              : ""}
           </time>
         </div>
-        <p className="font-bold text-sm">{`${
-          latestMessage?.senderId === USER_ID
-            ? "You"
-            : latestMessage?.senderName || "Unknown"
-        } :`}</p>
-        <p className="text-sm">{latestMessage?.content || "-"}</p>
+        <p className="font-bold text-sm">
+          {latestMessage?.senderName
+            ? latestMessage.senderId === USER_ID
+              ? "You :"
+              : `${latestMessage.senderName} :`
+            : ""}
+        </p>
+        <p className="text-sm">{latestMessage?.content || ""}</p>
       </div>
       {anyUnreadMessages && (
         <div

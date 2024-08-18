@@ -1,11 +1,13 @@
 import { Chat, Message, Participant } from "@/schemas/chat";
 
 export function findLatestMessage(messages: Message[]) {
-  return messages.reduce((latest, message) => {
-    return new Date(message.timestamp) > new Date(latest.timestamp)
-      ? message
-      : latest;
-  });
+  return messages.length > 0
+    ? messages.reduce((latest, message) => {
+        return new Date(message.timestamp) > new Date(latest.timestamp)
+          ? message
+          : latest;
+      })
+    : undefined;
 }
 
 export function findUndreadMessage(messages: Message[]) {
