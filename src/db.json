@@ -219,5 +219,47 @@
         }
       ]
     }
+  ],
+  "todos": [
+    {
+      "id": "1",
+      "title": "Prepare client contract",
+      "completed": false,
+      "date": "2024-08-20T10:00:00Z",
+      "description": "Draft the new contract for the client, including all recent updates and clauses.",
+      "categories": ["Client Related", "Important ASAP"]
+    },
+    {
+      "id": "2",
+      "title": "Weekly team sync",
+      "completed": false,
+      "date": "2024-08-19T14:00:00Z",
+      "description": "Join the virtual meeting to discuss this week's targets and tasks.",
+      "categories": ["Virtual Meeting", "ASAP"]
+    },
+    {
+      "id": "3",
+      "title": "Doctor's appointment",
+      "completed": true,
+      "date": "2024-08-18T09:00:00Z",
+      "description": "Attend the scheduled appointment with the doctor for the annual check-up.",
+      "categories": ["Appointments", "Self Task"]
+    },
+    {
+      "id": "4",
+      "title": "Review court case files",
+      "completed": false,
+      "date": "2024-08-21T15:00:00Z",
+      "description": "Go through the court case files and prepare notes for the upcoming hearing.",
+      "categories": ["Court Related", "Offline Meeting"]
+    },
+    {
+      "id": "5",
+      "title": "Follow up with client on feedback",
+      "completed": false,
+      "date": "2024-08-22T11:00:00Z",
+      "description": "Contact the client to discuss the feedback they provided on the latest project.",
+      "categories": ["Client Related", "ASAP"]
+    }
   ]
 }
