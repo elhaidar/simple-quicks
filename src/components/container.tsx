@@ -8,20 +8,27 @@ import { Task } from "./task";
 import { ChatRoom } from "./chat-room";
 import { useInbox } from "@/context/InboxContext";
 import { Chat } from "@/schemas/chat";
+import { Todo } from "@/schemas/todo";
+import { useTask } from "@/context/TaskContext";
 
 interface ContainerProps {
   chats: Chat[];
+  todos: Todo[];
 }
 
-export function Container({ chats }: ContainerProps) {
+export function Container({ chats, todos }: ContainerProps) {
   const { menu } = useMenu();
-  const { setChats } = useInbox();
-  const { selectedRoom, setSelectedRoom } = useInbox();
+  const { setChats, selectedRoom, setSelectedRoom } = useInbox();
+  const { setTodos } = useTask();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setChats(chats);
   }, [chats, setChats]);
+
+  useEffect(() => {
+    setTodos(todos);
+  }, [todos, setTodos]);
 
   useEffect(() => {
     if (menu) {
