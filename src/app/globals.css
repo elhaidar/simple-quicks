@@ -99,3 +99,14 @@
   border-radius: 20px;
   background-color: #bdbdbd;
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  position: absolute;
+  right: 16px;
+  width: 14px;
+  height: 14px;
+  border-width: thin;
+  color: inherit;
+  display: none;
+}

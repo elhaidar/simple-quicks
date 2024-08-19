@@ -50,7 +50,6 @@ export function BubbleChat({
       className={cn("flex flex-col gap-1", variant === "right" && "items-end")}
       exit={{
         opacity: 0,
-        transformOrigin: "right",
       }}
     >
       <p
