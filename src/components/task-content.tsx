@@ -1,3 +1,6 @@
+"use client";
+
+import { useTask } from "@/context/TaskContext";
 import { TaskFilterPopover } from "./task-filter-popover";
 import { TaskItem } from "./task-item";
 import { Accordion } from "./ui/accordion";
@@ -7,6 +10,8 @@ import { Popover, PopoverContent } from "./ui/popover";
 import { ScrollArea } from "./ui/scroll-area";
 
 export function TaskContent() {
+  const { todos } = useTask();
+
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -16,11 +21,13 @@ export function TaskContent() {
       <ScrollArea>
         <Popover>
           <Accordion type="multiple">
-            <div className="flex gap-[22.5px] border-b">
-              <Checkbox className="mt-[24px]" />
-              <TaskItem value="item1" />
-              <PopoverContent>TES</PopoverContent>
-            </div>
+            {todos.map((todo) => (
+              <div key={todo.id} className="flex gap-[22.5px] border-b">
+                <Checkbox className="mt-[24px]" />
+                <TaskItem value={todo.id} />
+                <PopoverContent>{todo.description}</PopoverContent>
+              </div>
+            ))}
           </Accordion>
         </Popover>
       </ScrollArea>

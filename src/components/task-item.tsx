@@ -8,6 +8,7 @@ import { PopoverTrigger } from "./ui/popover";
 import { Input } from "./ui/input";
 import { Calendar } from "./ui/calendar";
 import { Datepicker } from "./datepicker";
+import { InputDescription } from "./input-description";
 
 interface TaskItemProps {
   value: string;
@@ -36,8 +37,9 @@ export function TaskItem({ value }: TaskItemProps) {
           </div>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="pb-[22px]">
+      <AccordionContent className="pb-[22px] space-y-2">
         <Datepicker />
+        <InputDescription />
       </AccordionContent>
     </AccordionItem>
   );
