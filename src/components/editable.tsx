@@ -49,7 +49,8 @@ export function Editable({
       ((type === "textarea" || type === "input") && keys.indexOf(key) > -1) ||
       (type !== "textarea" && allKeys.indexOf(key) > -1)
     ) {
-      setEditing(false);
+      childRef.current.blur();
+      // setEditing(false);
     }
   };
 

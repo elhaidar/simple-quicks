@@ -102,13 +102,16 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
       const payload = {
         message,
       };
-      const res = await fetch(`/api/chat/${chat?.chatId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        `/api/chat/${chat?.chatId}/${editMessage.messageId}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
       if (!res.ok) throw new Error("Failed to send message");
       setMessage("");
       updateMessage(chat.chatId, editMessage.messageId, message);

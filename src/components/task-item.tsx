@@ -15,11 +15,18 @@ import { getDateDifferenceMessage } from "@/lib/taskHelper";
 import { cn } from "@/lib/utils";
 import { Editable } from "./editable";
 import { Input } from "./ui/input";
-import { HTMLAttributes, SetStateAction, useRef, useState } from "react";
+import {
+  Dispatch,
+  HTMLAttributes,
+  SetStateAction,
+  useRef,
+  useState,
+} from "react";
 import { useTask } from "@/context/TaskContext";
 
 interface TaskItemProps {
   todo: Todo;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface TitleComponentProps
@@ -42,17 +49,43 @@ function TitleComponent({ title, completed, ...props }: TitleComponentProps) {
   );
 }
 
-export function TaskItem({ todo }: TaskItemProps) {
+export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
   const { id, title, description, date, completed } = todo;
 
   const { handleOnChangeTitle } = useTask();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(title);
 
   const childRef = useRef<HTMLInputElement>(null);
 
   const formattedDate = format(new Date(date), "dd/MM/yyyy");
   const dateDifference = getDateDifferenceMessage(date);
+
+  async function handleUpdateTitle() {
+    try {
+      if (!id || editedTitle === title) return;
+      const payload = {
+        title: editedTitle,
+      };
+      const res = await fetch(`/api/todo/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Error updating title");
+      handleOnChangeTitle(id, editedTitle);
+    } catch (err) {
+      if (err instanceof Error) {
+        setEditedTitle(title);
+        console.error(err.message);
+      }
+    } finally {
+      setIsEditing(false);
+    }
+  }
 
   return (
     <AccordionItem value={id} className="w-full">
@@ -68,20 +101,20 @@ export function TaskItem({ todo }: TaskItemProps) {
               childRef={childRef}
               placeholder="No Title"
               type="input"
-              text={title}
+              text={editedTitle}
               ViewComponent={
-                <TitleComponent completed={completed} title={title} />
+                <TitleComponent completed={completed} title={editedTitle} />
               }
             >
               <Input
                 className="w-full text-sm font-bold transition-all"
                 ref={childRef}
-                value={title}
+                value={editedTitle}
                 name="title"
-                onChange={(e) => handleOnChangeTitle(id, e.target.value)}
+                onChange={(e) => setEditedTitle(e.target.value)}
                 onKeyUp={(e) => e.preventDefault()}
                 onFocus={() => setIsEditing(true)}
-                onBlur={() => setIsEditing(false)}
+                onBlur={handleUpdateTitle}
               />
             </Editable>
           </div>
@@ -103,6 +136,7 @@ export function TaskItem({ todo }: TaskItemProps) {
                 className="h-4 w-4 shrink-0"
                 onClick={(e) => {
                   e.stopPropagation();
+                  setIsOpen((prev) => !prev);
                 }}
               />
             </PopoverTrigger>
@@ -110,8 +144,8 @@ export function TaskItem({ todo }: TaskItemProps) {
         </div>
       </AccordionTrigger>
       <AccordionContent className="pb-[22px] space-y-2">
-        <Datepicker initialDate={new Date(date)} />
-        <InputDescription initialDescription={description} />
+        <Datepicker todoId={id} initialDate={new Date(date)} />
+        <InputDescription todoId={id} initialDescription={description} />
       </AccordionContent>
     </AccordionItem>
   );

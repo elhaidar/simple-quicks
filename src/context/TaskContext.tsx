@@ -10,6 +10,7 @@ interface TaskContextType {
   handleOnChangeDescription(id: string, description: string): void;
   handleOnChangeDate(id: string, date: string): void;
   handleOnChangeTitle(id: string, title: string): void;
+  deleteTask(id: string): void;
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -43,6 +44,10 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
     );
   }
 
+  function deleteTask(id: string) {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  }
+
   return (
     <TaskContext.Provider
       value={{
@@ -52,6 +57,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         handleOnChangeDate,
         handleOnChangeDescription,
         handleOnChangeTitle,
+        deleteTask,
       }}
     >
       {children}
