@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
@@ -7,6 +7,15 @@ export async function GET() {
   const fileContents = await fs.readFile(jsonDirectory, "utf8");
   const json = JSON.parse(fileContents);
   const data = { data: json.todos };
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 50));
   return NextResponse.json(data);
+}
+
+export async function POST(req: NextRequest) {
+  const res = await req.json();
+  await new Promise((resolve) => setTimeout(resolve, 50));
+  return NextResponse.json(
+    { data: res, success: true, message: "Success add new task" },
+    { status: 201 }
+  );
 }
