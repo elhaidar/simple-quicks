@@ -4,12 +4,14 @@ import React, {
   useEffect,
   useState,
 } from "react";
+import { TitleComponentProps } from "./task-item";
 
 interface EditableProps {
   text: string;
-  type: string;
+  type: "textarea" | "input";
   placeholder: string;
   children: React.ReactNode;
+  ViewComponent?: React.ReactElement<TitleComponentProps>;
   childRef: MutableRefObject<any>;
   initialEditing?: boolean;
 }
@@ -19,6 +21,7 @@ export function Editable({
   type,
   placeholder,
   children,
+  ViewComponent,
   childRef,
   initialEditing,
 }: EditableProps) {
@@ -43,7 +46,7 @@ export function Editable({
     const enterKey = "Enter";
     const allKeys = [...keys, enterKey];
     if (
-      (type === "textarea" && keys.indexOf(key) > -1) ||
+      ((type === "textarea" || type === "input") && keys.indexOf(key) > -1) ||
       (type !== "textarea" && allKeys.indexOf(key) > -1)
     ) {
       setEditing(false);
@@ -60,9 +63,19 @@ export function Editable({
         >
           {children}
         </div>
+      ) : ViewComponent ? (
+        React.cloneElement(ViewComponent, {
+          onClick: () => {
+            setEditing(true);
+            childRef?.current?.focus();
+            const length = text.length;
+            childRef?.current?.setSelectionRange(length, length);
+          },
+        })
       ) : (
         <div
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             setEditing(true);
             childRef?.current?.focus();
             const length = text.length;

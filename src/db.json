@@ -248,7 +248,7 @@
     {
       "id": "4",
       "title": "Review court case files",
-      "completed": false,
+      "completed": true,
       "date": "2024-08-21T15:00:00Z",
       "description": "Go through the court case files and prepare notes for the upcoming hearing.",
       "categories": ["Court Related", "Offline Meeting"]

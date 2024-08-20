@@ -13,7 +13,7 @@ export interface Todo {
   id: string;
   title: string;
   completed: boolean;
-  date: Date;
+  date: string;
   description: string;
   categories: TodoCategory[];
 }

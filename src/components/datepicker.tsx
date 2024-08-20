@@ -9,9 +9,15 @@ import { cn } from "@/lib/utils";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 
-export function Datepicker() {
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [type, setType] = useState<"date" | "text">("text");
+interface DatepickerProps {
+  initialDate?: Date;
+}
+
+export function Datepicker({ initialDate }: DatepickerProps) {
+  const [date, setDate] = useState<Date | undefined>(initialDate);
+  const [type, setType] = useState<"date" | "text">(
+    initialDate ? "date" : "text"
+  );
 
   return (
     <div className="flex gap-[18px] py-1 items-center relative">

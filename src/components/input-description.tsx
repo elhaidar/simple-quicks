@@ -4,8 +4,16 @@ import { Editable } from "./editable";
 import { Textarea } from "./ui/textarea";
 import { useRef, useState } from "react";
 
-export function InputDescription() {
-  const [description, setDescription] = useState<string>("");
+interface InputDescriptionProps {
+  initialDescription?: string;
+}
+
+export function InputDescription({
+  initialDescription,
+}: InputDescriptionProps) {
+  const [description, setDescription] = useState<string>(
+    initialDescription || ""
+  );
 
   const childRef = useRef<HTMLTextAreaElement>(null);
 
