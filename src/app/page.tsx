@@ -4,6 +4,8 @@ import { SectionWrapper } from "@/components/section-wrapper";
 import { InboxProvider } from "@/context/InboxContext";
 import { MenuProvider } from "@/context/MenuContext";
 import { TaskProvider } from "@/context/TaskContext";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 async function getChats() {
   try {
@@ -46,15 +48,19 @@ export default async function Home() {
   const { chats, todos } = await getAllData();
 
   return (
-    <MenuProvider>
-      <SectionWrapper>
-        <InboxProvider>
-          <TaskProvider>
-            <Container chats={chats} todos={todos} />
-          </TaskProvider>
-        </InboxProvider>
-        <FloatingButtons />
-      </SectionWrapper>
-    </MenuProvider>
+    <Suspense fallback={<Loading />}>
+      <main className="flex-1 max-w-[734px] ml-auto px-[32px] py-[24px] h-screen">
+        <MenuProvider>
+          <SectionWrapper>
+            <InboxProvider>
+              <TaskProvider>
+                <Container chats={chats} todos={todos} />
+              </TaskProvider>
+            </InboxProvider>
+            <FloatingButtons />
+          </SectionWrapper>
+        </MenuProvider>
+      </main>
+    </Suspense>
   );
 }
