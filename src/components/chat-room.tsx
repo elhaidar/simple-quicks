@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion, MotionProps } from "framer-motion";
+import { AnimatePresence, motion, MotionProps } from "framer-motion";
 import { ArrowDown, ArrowLeft, Loader2, X } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
 import { useInbox } from "@/context/InboxContext";
@@ -28,6 +28,8 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
     setChats,
     editMessage,
     setEditMessage,
+    replyMessage,
+    setReplyMessage,
     addMessage,
     updateMessage,
   } = useInbox();
@@ -70,9 +72,14 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
       setIsSubmitting(true);
       e.preventDefault();
       if (!message) return;
-      const payload = {
-        message,
-      };
+      const payload = replyMessage
+        ? {
+            message,
+            repliedToMessageId: replyMessage.messageId,
+          }
+        : {
+            message,
+          };
       const res = await fetch(`/api/chat/${chat?.chatId}`, {
         method: "POST",
         headers: {
@@ -82,7 +89,8 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
       });
       if (!res.ok) throw new Error("Failed to send message");
       setMessage("");
-      addMessage(chat.chatId, message);
+      addMessage(chat.chatId, message, replyMessage?.messageId);
+      setReplyMessage(null);
       scrollToBottom();
     } catch (err) {
       if (err instanceof Error) {
@@ -145,6 +153,13 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
   useEffect(() => {
     setMessage(editMessage?.content || "");
   }, [editMessage]);
+
+  useEffect(() => {
+    return () => {
+      setEditMessage(null);
+      setReplyMessage(null);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -213,7 +228,13 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
             onSubmit={editMessage ? handleUpdate : handleSubmit}
           >
             <div className="w-full relative">
-              {editMessage && <PreviewMessageBox message={editMessage} />}
+              <AnimatePresence>
+                {editMessage ? (
+                  <PreviewMessageBox message={editMessage} />
+                ) : replyMessage ? (
+                  <PreviewMessageBox message={replyMessage} isReplying />
+                ) : null}
+              </AnimatePresence>
               <Input
                 type="text"
                 placeholder="Type a new message"

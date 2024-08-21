@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { Message } from "@/schemas/chat";
 import { useInbox } from "@/context/InboxContext";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface PreviewMessageBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   message: Message;
@@ -15,14 +16,17 @@ export function PreviewMessageBox({
   isReplying,
   className,
 }: PreviewMessageBoxProps) {
-  const { setEditMessage } = useInbox();
+  const { setEditMessage, setReplyMessage } = useInbox();
 
   return (
-    <div
+    <motion.div
       className={cn(
-        "bg-secondary-2 pt-[15px] pb-8 px-[17px] rounded-lg border-[1px] border-border w-full absolute bottom-8 -z-[0]",
+        "bg-secondary-2 pt-[15px] pb-8 px-[17px] rounded-lg border-[1px] border-border w-full absolute bottom-5 -z-[0]",
         className
       )}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
     >
       <div className="flex items-center justify-between">
         <p className="font-bold text-sm">
@@ -34,12 +38,13 @@ export function PreviewMessageBox({
           size={"icon16"}
           onClick={() => {
             setEditMessage(null);
+            setReplyMessage(null);
           }}
         >
           <X />
         </Button>
       </div>
       <p className="text-sm mt-1 max-w-[500px]">{message.content}</p>
-    </div>
+    </motion.div>
   );
 }

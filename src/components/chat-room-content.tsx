@@ -39,6 +39,13 @@ export function ChatRoomContent({ chat }: ChatRoomContentProps) {
                   }
                   variant={message.senderId === USER_ID ? "right" : "left"}
                   message={message}
+                  repliedContent={
+                    message.repliedToMessageId
+                      ? chat.messages.find(
+                          (m) => m.messageId === message.repliedToMessageId
+                        )?.content
+                      : undefined
+                  }
                   chatId={chat.chatId}
                 />
               ))}

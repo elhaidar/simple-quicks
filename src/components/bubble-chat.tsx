@@ -15,6 +15,7 @@ interface BubbleChatProps {
   color?: string;
   message: Message;
   chatId: string;
+  repliedContent?: string;
 }
 
 export function BubbleChat({
@@ -22,6 +23,7 @@ export function BubbleChat({
   color,
   message,
   chatId,
+  repliedContent,
 }: BubbleChatProps) {
   const time = new Date(message.timestamp).toLocaleTimeString([], {
     hour: "2-digit",
@@ -29,7 +31,7 @@ export function BubbleChat({
     hourCycle: "h24",
   });
 
-  const { deleteMessage, setEditMessage } = useInbox();
+  const { deleteMessage, setEditMessage, setReplyMessage } = useInbox();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,7 +49,9 @@ export function BubbleChat({
 
   return (
     <motion.div
-      className={cn("flex flex-col gap-1", variant === "right" && "items-end")}
+      className={cn("flex flex-col gap-2", variant === "right" && "items-end")}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       exit={{
         opacity: 0,
       }}
@@ -63,6 +67,15 @@ export function BubbleChat({
       >
         {variant === "right" ? "You" : message.senderName}
       </p>
+      {message.repliedToMessageId && (
+        <div
+          className={cn(
+            "bg-secondary-2 p-[10px] rounded-lg border border-secondary max-w-[518px] min-w-[100px] w-fit"
+          )}
+        >
+          <p className="text-sm max-w-[500px]">{repliedContent || ""}</p>
+        </div>
+      )}
       <div
         className={cn("flex gap-2", variant === "right" && "flex-row-reverse")}
       >
@@ -101,7 +114,7 @@ export function BubbleChat({
           </PopoverTrigger>
           <PopoverContent className="w-[126px] p-0 border-border-secondary">
             <div className="flex flex-col items-start rounded-none">
-              {message.senderId === USER_ID && (
+              {message.senderId === USER_ID ? (
                 <Button
                   className={cn(
                     "text-base text-primary w-full flex justify-start border-b-[1px] border-border-secondary",
@@ -115,6 +128,20 @@ export function BubbleChat({
                   }}
                 >
                   Edit
+                </Button>
+              ) : (
+                <Button
+                  className={cn(
+                    "text-base text-primary w-full flex justify-start border-b-[1px] border-border-secondary"
+                  )}
+                  variant="ghost-secondary"
+                  size="sm"
+                  onClick={() => {
+                    setReplyMessage(message);
+                    setIsOpen(false);
+                  }}
+                >
+                  Reply
                 </Button>
               )}
               <Button

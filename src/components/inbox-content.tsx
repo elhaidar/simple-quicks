@@ -6,6 +6,7 @@ import { useInbox } from "@/context/InboxContext";
 import { PersonalChatItem } from "./personal-chat-item";
 import { useMemo } from "react";
 import { USER_ID } from "@/lib/constant";
+import { AnimatePresence, motion } from "framer-motion";
 
 export function InboxContent() {
   const { setSelectedRoom, chats, search } = useInbox();
@@ -40,26 +41,40 @@ export function InboxContent() {
 
   return (
     <div>
-      {searchedChats.map((item, index) => {
-        if (item.type === "group") {
-          return (
-            <div key={item.chatId} onClick={() => setSelectedRoom(item.chatId)}>
-              <GroupItem data={item} index={index % sortedChats.length} />
-              <hr className="border-border" />
-            </div>
-          );
-        } else if (item.type === "personal") {
-          return (
-            <div key={item.chatId} onClick={() => setSelectedRoom(item.chatId)}>
-              <PersonalChatItem
-                data={item}
-                index={index % sortedChats.length}
-              />
-              <hr className="border-border" />
-            </div>
-          );
-        }
-      })}
+      <AnimatePresence>
+        {searchedChats.map((item, index) => {
+          if (item.type === "group") {
+            return (
+              <motion.div
+                key={item.chatId}
+                onClick={() => setSelectedRoom(item.chatId)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <GroupItem data={item} index={index % sortedChats.length} />
+                <hr className="border-border" />
+              </motion.div>
+            );
+          } else if (item.type === "personal") {
+            return (
+              <motion.div
+                key={item.chatId}
+                onClick={() => setSelectedRoom(item.chatId)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <PersonalChatItem
+                  data={item}
+                  index={index % sortedChats.length}
+                />
+                <hr className="border-border" />
+              </motion.div>
+            );
+          }
+        })}
+      </AnimatePresence>
     </div>
   );
 }

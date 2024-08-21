@@ -13,9 +13,13 @@ interface InboxContextType {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   editMessage: Message | null;
   setEditMessage: React.Dispatch<React.SetStateAction<Message | null>>;
-  isReplying: boolean;
-  setIsReplying: React.Dispatch<React.SetStateAction<boolean>>;
-  addMessage(chatId: string, message: string): void;
+  replyMessage: Message | null;
+  setReplyMessage: React.Dispatch<React.SetStateAction<Message | null>>;
+  addMessage(
+    chatId: string,
+    message: string,
+    repliedToMessageId?: string
+  ): void;
   updateMessage(chatId: string, messageId: string, message: string): void;
   deleteMessage(chatId: string, messageId: string): void;
 }
@@ -27,24 +31,39 @@ export const InboxProvider = ({ children }: { children: ReactNode }) => {
   const [chats, setChats] = useState<Chat[]>([]);
   const [search, setSearch] = useState<string>("");
   const [editMessage, setEditMessage] = useState<Message | null>(null);
-  const [isReplying, setIsReplying] = useState<boolean>(false);
+  const [replyMessage, setReplyMessage] = useState<Message | null>(null);
 
-  function addMessage(chatId: string, message: string) {
+  function addMessage(
+    chatId: string,
+    message: string,
+    repliedToMessageId?: string
+  ) {
     const updatedChats = chats.map((chat) => {
       if (chat.chatId === chatId) {
         return {
           ...chat,
           messages: [
             ...chat.messages,
-            {
-              messageId: `msg_${chat.messages.length + 1}`,
-              senderId: USER_ID,
-              senderName: "John Doe",
-              content: message,
-              timestamp: new Date().toISOString(),
-              isRead: true,
-              isEdited: false,
-            },
+            repliedToMessageId
+              ? {
+                  messageId: `msg_${chat.messages.length + 1}`,
+                  senderId: USER_ID,
+                  senderName: "John Doe",
+                  content: message,
+                  timestamp: new Date().toISOString(),
+                  isRead: true,
+                  isEdited: false,
+                  repliedToMessageId,
+                }
+              : {
+                  messageId: `msg_${chat.messages.length + 1}`,
+                  senderId: USER_ID,
+                  senderName: "John Doe",
+                  content: message,
+                  timestamp: new Date().toISOString(),
+                  isRead: true,
+                  isEdited: false,
+                },
           ],
         };
       }
@@ -104,8 +123,8 @@ export const InboxProvider = ({ children }: { children: ReactNode }) => {
         setSearch,
         editMessage,
         setEditMessage,
-        isReplying,
-        setIsReplying,
+        replyMessage,
+        setReplyMessage,
         addMessage,
         updateMessage,
         deleteMessage,
