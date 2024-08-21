@@ -166,7 +166,8 @@
           "content": "See you all there!",
           "timestamp": "2024-08-17T09:25:00Z",
           "isRead": false,
-          "isEdited": false
+          "isEdited": false,
+          "repliedToMessageId": "msg_5"
         }
       ]
     },
@@ -203,7 +204,7 @@
           "messageId": "msg_1",
           "senderId": "user_3",
           "senderName": "Alice Jones",
-          "content": "The meeting is at 3 PM.",
+          "content": "Hello sir, I will be your case advisor for case #029290. I have assigned some homework for you to fill. Please keep up with the due dates. Should you have any questions, you can message me anytime. Thanks.",
           "timestamp": "2024-08-17T20:00:00Z",
           "isRead": false,
           "isEdited": false
@@ -215,7 +216,8 @@
           "content": "Got it, see you there bud!",
           "timestamp": "2024-08-17T20:05:00Z",
           "isRead": false,
-          "isEdited": false
+          "isEdited": false,
+          "repliedToMessageId": "msg_1"
         }
       ]
     }

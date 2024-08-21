@@ -15,6 +15,7 @@ export interface Message {
   timestamp: string;
   isRead: boolean;
   isEdited: boolean;
+  repliedToMessageId?: string;
 }
 
 export interface Participant {

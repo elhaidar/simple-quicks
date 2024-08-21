@@ -7,13 +7,11 @@ export async function GET() {
   const fileContents = await fs.readFile(jsonDirectory, "utf8");
   const json = JSON.parse(fileContents);
   const data = { data: json.todos };
-  await new Promise((resolve) => setTimeout(resolve, 50));
   return NextResponse.json(data);
 }
 
 export async function POST(req: NextRequest) {
   const res = await req.json();
-  await new Promise((resolve) => setTimeout(resolve, 50));
   return NextResponse.json(
     { data: res, success: true, message: "Success add new task" },
     { status: 201 }
