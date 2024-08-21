@@ -14,6 +14,7 @@ interface EditableProps {
   ViewComponent?: React.ReactElement<TitleComponentProps>;
   childRef: MutableRefObject<any>;
   initialEditing?: boolean;
+  isEdit?: boolean;
 }
 
 export function Editable({
@@ -24,6 +25,7 @@ export function Editable({
   ViewComponent,
   childRef,
   initialEditing,
+  isEdit,
 }: EditableProps) {
   const [isEditing, setEditing] = useState(
     initialEditing ? initialEditing : false
@@ -36,6 +38,12 @@ export function Editable({
       childRef.current.setSelectionRange(length, length);
     }
   }, [isEditing, childRef]);
+
+  useEffect(() => {
+    if (isEdit) {
+      setEditing(isEdit);
+    }
+  }, [isEdit]);
 
   const handleKeyDown = (
     event: KeyboardEvent<HTMLDivElement>,
@@ -82,7 +90,6 @@ export function Editable({
             const length = text.length;
             childRef?.current?.setSelectionRange(length, length);
           }}
-          className="w-full"
         >
           <span>{text || placeholder}</span>
         </div>

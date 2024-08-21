@@ -20,6 +20,7 @@ export function InputDescription({
   const [editedDescription, setEditedDescription] = useState<string>(
     initialDescription || ""
   );
+  const [isEditing, setIsEditing] = useState(false);
 
   const childRef = useRef<HTMLTextAreaElement>(null);
 
@@ -59,15 +60,18 @@ export function InputDescription({
     <div className="flex gap-[18px] py-1">
       <Icons.edit
         className={cn(
-          "w-4 h-4 mr-[6px] transition-all",
+          "w-4 h-4 mr-[6px] transition-all cursor-pointer",
           editedDescription ? "fill-primary" : "fill-foreground"
         )}
+        onClick={() => setIsEditing(!isEditing)}
       />
       <Editable
         childRef={childRef}
         placeholder="No description"
         text={editedDescription}
         type="textarea"
+        initialEditing={isEditing}
+        isEdit={isEditing}
       >
         <Textarea
           className="w-full p-2"

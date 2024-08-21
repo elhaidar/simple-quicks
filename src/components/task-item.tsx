@@ -44,7 +44,7 @@ function TitleComponent({ title, completed, ...props }: TitleComponentProps) {
       )}
       {...props}
     >
-      {title}
+      {title || "No Title"}
     </h3>
   );
 }
@@ -54,12 +54,12 @@ export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
 
   const { handleOnChangeTitle } = useTask();
 
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(todo.title === "" ? true : false);
   const [editedTitle, setEditedTitle] = useState(title);
 
   const childRef = useRef<HTMLInputElement>(null);
 
-  const formattedDate = format(new Date(date), "dd/MM/yyyy");
+  const formattedDate = date ? format(new Date(date), "dd/MM/yyyy") : "";
   const dateDifference = getDateDifferenceMessage(date);
 
   async function handleUpdateTitle() {
@@ -105,6 +105,7 @@ export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
               ViewComponent={
                 <TitleComponent completed={completed} title={editedTitle} />
               }
+              initialEditing={isEditing}
             >
               <Input
                 className="w-full text-sm font-bold transition-all"
@@ -122,7 +123,7 @@ export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
             <p
               className={cn(
                 "text-destructive text-xs transition",
-                completed && "hidden"
+                (completed || !date) && "hidden"
               )}
             >
               {dateDifference}

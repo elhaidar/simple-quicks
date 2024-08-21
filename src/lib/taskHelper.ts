@@ -1,8 +1,10 @@
 import { Todo } from "@/schemas/todo";
-import { differenceInCalendarDays, differenceInDays } from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 
 export function sortTodosByDate(todos: Todo[]): Todo[] {
   return todos.sort((a, b) => {
+    if (!a.date) return 0;
+
     if (a.completed !== b.completed) {
       return a.completed ? 1 : -1;
     }
