@@ -1,6 +1,7 @@
 "use client";
 
 import { useMenu } from "@/context/MenuContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 interface SectionWrapperProps {
@@ -11,13 +12,15 @@ export function SectionWrapper({ children }: SectionWrapperProps) {
   const { setMenu } = useMenu();
   const sectionRef = useRef<HTMLElement | null>(null);
 
+  const queryClient = new QueryClient();
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
         sectionRef.current &&
         !sectionRef.current.contains(event.target as Node)
       ) {
-        setMenu(""); // Set menu to empty string if clicked outside the section
+        setMenu("");
       }
     }
 
@@ -28,8 +31,10 @@ export function SectionWrapper({ children }: SectionWrapperProps) {
   }, [setMenu]);
 
   return (
-    <section ref={sectionRef} className="w-full h-full relative">
-      {children}
-    </section>
+    <QueryClientProvider client={queryClient}>
+      <section ref={sectionRef} className="w-full h-full relative">
+        {children}
+      </section>
+    </QueryClientProvider>
   );
 }

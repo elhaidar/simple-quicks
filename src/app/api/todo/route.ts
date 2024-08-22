@@ -7,6 +7,7 @@ export async function GET() {
   const fileContents = await fs.readFile(jsonDirectory, "utf8");
   const json = JSON.parse(fileContents);
   const data = { data: json.todos };
+  await new Promise((resolve) => setTimeout(resolve, 500));
   return NextResponse.json(data);
 }
 

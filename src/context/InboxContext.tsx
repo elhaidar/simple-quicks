@@ -2,7 +2,13 @@
 
 import { USER_ID } from "@/lib/constant";
 import { Chat, Message } from "@/schemas/chat";
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface InboxContextType {
   selectedRoom: string | null;
@@ -111,6 +117,12 @@ export const InboxProvider = ({ children }: { children: ReactNode }) => {
 
     setChats(updatedChats);
   }
+
+  useEffect(() => {
+    if (chats.length > 0) {
+      localStorage.setItem("chats", JSON.stringify(chats));
+    }
+  }, [chats]);
 
   return (
     <InboxContext.Provider

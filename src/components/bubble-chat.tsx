@@ -73,7 +73,7 @@ export function BubbleChat({
             "bg-secondary-2 p-[10px] rounded-lg border border-secondary max-w-[518px] min-w-[100px] w-fit"
           )}
         >
-          <p className="text-sm max-w-[500px]">{repliedContent || ""}</p>
+          <p className="text-sm max-w-[500px]">{repliedContent}</p>
         </div>
       )}
       <div

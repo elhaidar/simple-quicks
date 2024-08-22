@@ -169,10 +169,10 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
       exit={{ opacity: 0, scale: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "bg-white w-full h-[80%] max-h-dvh md:h-[737px] absolute bottom-[110px] rounded-[6px] origin-bottom-right"
+        "bg-white w-full h-[80%] max-h-dvh 2xl:h-[737px] absolute bottom-[110px] rounded-[6px] origin-bottom-right"
       )}
     >
-      <div className="flex gap-4 items-center px-6 bg-white z-[10] sticky top-0 py-5 border-b-[2px] border-secondary">
+      <div className="flex gap-4 items-center px-6 bg-white sticky top-0 py-5 border-b-[2px] border-secondary">
         <Button
           variant={"icon"}
           size={"icon24"}
@@ -200,13 +200,17 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
         </Button>
       </div>
       <div className="flex flex-col px-6 pt-2 pb-8 w-full max-h-[80%] overflow-y-auto">
-        <ChatRoomContent chat={chat} />
-        <motion.div
+        <ChatRoomContent
+          chat={chat}
+          chatEndRef={chatEndRef}
+          onViewportEnter={newMessageOnViewportEnter}
+        />
+        {/* <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           ref={chatEndRef}
           onViewportEnter={newMessageOnViewportEnter}
-        />
+        /> */}
       </div>
       <div className={cn("absolute bottom-0 w-full")}>
         {anyUnreadMessages && (

@@ -8,19 +8,25 @@ import { AnimatePresence, motion } from "framer-motion";
 
 interface ChatRoomContentProps {
   chat?: Chat;
+  chatEndRef: React.RefObject<HTMLDivElement>;
+  onViewportEnter?: () => void;
 }
 
-export function ChatRoomContent({ chat }: ChatRoomContentProps) {
+export function ChatRoomContent({
+  chat,
+  chatEndRef,
+  onViewportEnter,
+}: ChatRoomContentProps) {
   const setOfUniqueDates = new Set<string>(
     chat?.messages.map((message) => message.timestamp.split("T")[0]) || []
   );
 
   return (
     <div className="pb-4">
-      {Array.from(setOfUniqueDates).map((date) => (
-        <div key={date} className="space-y-4">
-          <AnimatePresence>
-            <ChatDayDivider date={date} />
+      <AnimatePresence>
+        {Array.from(setOfUniqueDates).map((date, index) => (
+          <div key={index} className="space-y-4">
+            <ChatDayDivider key={date} date={date} />
             {chat?.messages
               .filter((message) => message.timestamp.split("T")[0] === date)
               .map((message) => (
@@ -43,15 +49,21 @@ export function ChatRoomContent({ chat }: ChatRoomContentProps) {
                     message.repliedToMessageId
                       ? chat.messages.find(
                           (m) => m.messageId === message.repliedToMessageId
-                        )?.content
+                        )?.content || "Deleted Message"
                       : undefined
                   }
                   chatId={chat.chatId}
                 />
               ))}
-          </AnimatePresence>
-        </div>
-      ))}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              ref={chatEndRef}
+              onViewportEnter={onViewportEnter}
+            />
+          </div>
+        ))}
+      </AnimatePresence>
     </div>
   );
 }

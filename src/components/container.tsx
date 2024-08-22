@@ -1,7 +1,7 @@
 "use client";
 
 import { useMenu } from "@/context/MenuContext";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Inbox } from "./inbox";
 import { Task } from "./task";
@@ -9,35 +9,17 @@ import { ChatRoom } from "./chat-room";
 import { useInbox } from "@/context/InboxContext";
 import { Chat } from "@/schemas/chat";
 import { Todo } from "@/schemas/todo";
-import { useTask } from "@/context/TaskContext";
 
 interface ContainerProps {
   chats: Chat[];
   todos: Todo[];
 }
 
-export function Container({ chats, todos }: ContainerProps) {
+export function Container() {
   const { menu } = useMenu();
-  const { setChats, selectedRoom, setSelectedRoom } = useInbox();
-  const { setTodos } = useTask();
-  const [isLoading, setIsLoading] = useState(true);
+  const { selectedRoom, setSelectedRoom } = useInbox();
 
   useEffect(() => {
-    setChats(chats);
-  }, [chats, setChats]);
-
-  useEffect(() => {
-    setTodos(todos);
-  }, [todos, setTodos]);
-
-  useEffect(() => {
-    if (menu) {
-      setIsLoading(true);
-      setTimeout(() => setIsLoading(false), 1000);
-    } else {
-      setIsLoading(true);
-    }
-
     return () => {
       setSelectedRoom(null);
     };
@@ -49,10 +31,10 @@ export function Container({ chats, todos }: ContainerProps) {
         selectedRoom ? (
           <ChatRoom />
         ) : (
-          <Inbox key={menu} isLoading={isLoading} />
+          <Inbox key={menu} />
         )
       ) : menu === "task" ? (
-        <Task isLoading={isLoading} key={menu} />
+        <Task key={menu} />
       ) : null}
     </AnimatePresence>
   );
