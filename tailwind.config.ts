@@ -72,6 +72,7 @@ const config = {
           5: "hsl(var(--stickers-5))",
           6: "hsl(var(--stickers-6))",
           7: "hsl(var(--stickers-7))",
+          8: "hsl(var(--stickers-8))",
         },
         chats: {
           1: "hsl(var(--chats-1))",

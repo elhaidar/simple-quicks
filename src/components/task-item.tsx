@@ -23,6 +23,7 @@ import {
   useState,
 } from "react";
 import { useTask } from "@/context/TaskContext";
+import { Stickers } from "./stickers";
 
 interface TaskItemProps {
   todo: Todo;
@@ -50,7 +51,7 @@ function TitleComponent({ title, completed, ...props }: TitleComponentProps) {
 }
 
 export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
-  const { id, title, description, date, completed } = todo;
+  const { id, title, description, date, completed, categories } = todo;
 
   const { handleOnChangeTitle } = useTask();
 
@@ -147,6 +148,7 @@ export function TaskItem({ todo, setIsOpen }: TaskItemProps) {
       <AccordionContent className="pb-[22px] space-y-2">
         <Datepicker todoId={id} initialDate={new Date(date)} />
         <InputDescription todoId={id} initialDescription={description} />
+        <Stickers todoId={id} categories={categories} />
       </AccordionContent>
     </AccordionItem>
   );

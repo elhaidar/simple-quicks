@@ -1,7 +1,13 @@
 "use client";
 
-import { Todo } from "@/schemas/todo";
-import { createContext, ReactNode, useContext, useState } from "react";
+import { Todo, TodoCategory } from "@/schemas/todo";
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 interface TaskContextType {
   todos: Todo[];
@@ -10,6 +16,7 @@ interface TaskContextType {
   handleOnChangeDescription(id: string, description: string): void;
   handleOnChangeDate(id: string, date: string): void;
   handleOnChangeTitle(id: string, title: string): void;
+  handleOnChangeCategory(id: string, categories: TodoCategory[]): void;
   addTask(todo: Todo): void;
   deleteTask(id: string): void;
 }
@@ -44,6 +51,11 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
       prev.map((todo) => (todo.id === id ? { ...todo, title } : todo))
     );
   }
+  function handleOnChangeCategory(id: string, categories: TodoCategory[]) {
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === id ? { ...todo, categories } : todo))
+    );
+  }
 
   function addTask(todo: Todo) {
     setTodos((prev) => [...prev, todo]);
@@ -52,6 +64,12 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
   function deleteTask(id: string) {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   }
+
+  useEffect(() => {
+    if (todos.length > 0) {
+      localStorage.setItem("todos", JSON.stringify(todos));
+    }
+  }, [todos]);
 
   return (
     <TaskContext.Provider
@@ -62,6 +80,7 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
         handleOnChangeDate,
         handleOnChangeDescription,
         handleOnChangeTitle,
+        handleOnChangeCategory,
         addTask,
         deleteTask,
       }}
