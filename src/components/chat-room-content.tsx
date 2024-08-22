@@ -22,7 +22,7 @@ export function ChatRoomContent({
   );
 
   return (
-    <div className="pb-4">
+    <div className="xl:pb-12 2xl:pb-4">
       {Array.from(setOfUniqueDates).map((date, index) => (
         <div key={index} className="space-y-4">
           <ChatDayDivider key={date} date={date} />

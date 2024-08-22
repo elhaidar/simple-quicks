@@ -48,7 +48,7 @@ export function Inbox({ ...props }: InboxProps) {
       exit={{ scale: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "bg-white w-full h-[80%] max-h-dvh 2xl:h-[737px] overflow-y-auto absolute bottom-[110px] rounded-[6px] pb-6 origin-bottom-right"
+        "bg-white w-full h-[80%] max-h-dvh min-[1920px]:]:h-[737px] overflow-y-auto absolute bottom-[110px] rounded-[6px] pb-6 origin-bottom-right"
       )}
     >
       <SearchChat />

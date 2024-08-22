@@ -169,7 +169,7 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
       exit={{ opacity: 0, scale: 0 }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "bg-white w-full h-[80%] max-h-dvh 2xl:h-[737px] absolute bottom-[110px] rounded-[6px] origin-bottom-right"
+        "bg-white w-full h-[80%] max-h-dvh min-[1920px]:]:h-[737px] absolute bottom-[110px] rounded-[6px] origin-bottom-right"
       )}
     >
       <div className="flex gap-4 items-center px-6 bg-white sticky top-0 py-5 border-b-[2px] border-secondary">
