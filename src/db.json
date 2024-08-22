@@ -11,75 +11,28 @@
           "avatarUrl": "https://example.com/avatars/john_doe.jpg"
         },
         {
-          "userId": "user_2",
-          "username": "jane_smith",
-          "displayName": "Jane Smith",
-          "avatarUrl": "https://example.com/avatars/jane_smith.jpg"
+          "userId": "user_5",
+          "username": "fastvisa_support",
+          "displayName": "FastVisa Support",
+          "avatarUrl": "https://example.com/avatars/fastvisa_support.jpg"
         }
       ],
       "messages": [
         {
           "messageId": "msg_1",
-          "senderId": "user_1",
-          "senderName": "John Doe",
-          "content": "Hi, how are you?",
-          "timestamp": "2024-08-17T10:30:00Z",
+          "senderId": "user_5",
+          "senderName": "FastVisa Support",
+          "content": "Hello! How can we assist you today?",
+          "timestamp": "2024-08-15T12:00:00Z",
           "isRead": false,
           "isEdited": false
         },
         {
           "messageId": "msg_2",
-          "senderId": "user_2",
-          "senderName": "Jane Smith",
-          "content": "I'm good, thanks! How about you?",
-          "timestamp": "2024-08-17T10:31:00Z",
-          "isRead": false,
-          "isEdited": false
-        }
-      ]
-    },
-    {
-      "chatId": "personal_2",
-      "type": "personal",
-      "participants": [
-        {
-          "userId": "user_1",
-          "username": "john_doe",
-          "displayName": "John Doe",
-          "avatarUrl": "https://example.com/avatars/john_doe.jpg"
-        },
-        {
-          "userId": "user_4",
-          "username": "obu",
-          "displayName": "Obu",
-          "avatarUrl": "https://example.com/avatars/obu.jpg"
-        }
-      ],
-      "messages": [
-        {
-          "messageId": "msg_1",
           "senderId": "user_1",
           "senderName": "John Doe",
-          "content": "Hi, how are you?",
-          "timestamp": "2024-08-15T10:30:00Z",
-          "isRead": false,
-          "isEdited": false
-        },
-        {
-          "messageId": "msg_2",
-          "senderId": "user_4",
-          "senderName": "Obu",
-          "content": "I'm good, thanks! How about you?",
-          "timestamp": "2024-08-16T10:31:00Z",
-          "isRead": false,
-          "isEdited": false
-        },
-        {
-          "messageId": "msg_3",
-          "senderId": "user_1",
-          "senderName": "John Doe",
-          "content": "Glad to hear that! I'm doing well too.",
-          "timestamp": "2024-08-16T10:33:00Z",
+          "content": "I have a question about my visa application.",
+          "timestamp": "2024-08-15T12:05:00Z",
           "isRead": false,
           "isEdited": false
         }
@@ -88,93 +41,65 @@
     {
       "chatId": "group_1",
       "type": "group",
-      "groupName": "Project Team",
+      "groupName": "John Doe (Hutto I-589) [ Hutto Follow Up - Brief Service ]",
       "groupAvatarUrl": "https://example.com/avatars/project_team.jpg",
       "participants": [
-        {
-          "userId": "user_1",
-          "username": "john_doe",
-          "displayName": "John Doe",
-          "avatarUrl": "https://example.com/avatars/john_doe.jpg",
-          "role": "admin"
-        },
-        {
-          "userId": "user_2",
-          "username": "jane_smith",
-          "displayName": "Jane Smith",
-          "avatarUrl": "https://example.com/avatars/jane_smith.jpg",
-          "role": "member"
-        },
         {
           "userId": "user_3",
           "username": "alice_jones",
           "displayName": "Alice Jones",
           "avatarUrl": "https://example.com/avatars/alice_jones.jpg",
+          "role": "admin"
+        },
+        {
+          "userId": "user_2",
+          "username": "mary_hilda",
+          "displayName": "Mary Hilda",
+          "avatarUrl": "https://example.com/avatars/mary_hilda.jpg",
+          "role": "admin"
+        },
+        {
+          "userId": "user_1",
+          "username": "john_doe",
+          "displayName": "John Doe",
+          "avatarUrl": "https://example.com/avatars/john_doe.jpg",
           "role": "member"
         }
       ],
       "messages": [
         {
           "messageId": "msg_1",
-          "senderId": "user_3",
-          "senderName": "Alice Jones",
-          "content": "The meeting is at 5 PM.",
-          "timestamp": "2024-08-17T09:00:00Z",
-          "isRead": true,
+          "senderId": "user_2",
+          "senderName": "Mary Hilda",
+          "content": "Hello team members! Let's discuss the progress on the Hutto I-589 case.",
+          "timestamp": "2024-08-16T10:00:00Z",
+          "isRead": false,
           "isEdited": false
         },
         {
           "messageId": "msg_2",
-          "senderId": "user_1",
-          "senderName": "John Doe",
-          "content": "Got it, see you there!",
-          "timestamp": "2024-08-17T09:05:00Z",
-          "isRead": true,
+          "senderId": "user_3",
+          "senderName": "Alice Jones",
+          "content": "I have updated the case notes with the latest information. Please review and provide your feedback.",
+          "timestamp": "2024-08-16T10:05:00Z",
+          "isRead": false,
           "isEdited": false
         },
         {
           "messageId": "msg_3",
-          "senderId": "user_2",
-          "senderName": "Jane Smith",
-          "content": "I'll be there too.",
-          "timestamp": "2024-08-17T09:10:00Z",
-          "isRead": true,
-          "isEdited": false
-        },
-        {
-          "messageId": "msg_4",
-          "senderId": "user_3",
-          "senderName": "Alice Jones",
-          "content": "Great, looking forward to it!",
-          "timestamp": "2024-08-17T09:15:00Z",
-          "isRead": true,
-          "isEdited": false
-        },
-        {
-          "messageId": "msg_5",
           "senderId": "user_1",
           "senderName": "John Doe",
-          "content": "Me too!",
-          "timestamp": "2024-08-17T09:20:00Z",
-          "isRead": true,
-          "isEdited": false
-        },
-        {
-          "messageId": "msg_6",
-          "senderId": "user_2",
-          "senderName": "Jane Smith",
-          "content": "See you all there!",
-          "timestamp": "2024-08-17T09:25:00Z",
+          "content": "Thank you, Alice. I will review the notes and share my feedback soon.",
+          "timestamp": "2024-08-16T10:10:00Z",
           "isRead": false,
-          "isEdited": false,
-          "repliedToMessageId": "msg_5"
+          "isEdited": false
         }
       ]
     },
     {
       "chatId": "group_2",
       "type": "group",
-      "groupName": "Project Team 2",
+      "groupName": "109220-Naturalization",
       "groupAvatarUrl": "https://example.com/avatars/project_team.jpg",
       "participants": [
         {
@@ -186,9 +111,9 @@
         },
         {
           "userId": "user_2",
-          "username": "jane_smith",
-          "displayName": "Jane Smith",
-          "avatarUrl": "https://example.com/avatars/jane_smith.jpg",
+          "username": "mary_hilda",
+          "displayName": "Mary Hilda",
+          "avatarUrl": "https://example.com/avatars/mary_hilda.jpg",
           "role": "member"
         },
         {
@@ -213,11 +138,19 @@
           "messageId": "msg_2",
           "senderId": "user_1",
           "senderName": "John Doe",
-          "content": "Got it, see you there bud!",
+          "content": "Thank you, Alice. I will make sure to complete the homework on time.",
           "timestamp": "2024-08-17T20:05:00Z",
           "isRead": false,
-          "isEdited": false,
-          "repliedToMessageId": "msg_1"
+          "isEdited": false
+        },
+        {
+          "messageId": "msg_3",
+          "senderId": "user_2",
+          "senderName": "Mary Hilda",
+          "content": "Good luck, John! Let us know if you need any help.",
+          "timestamp": "2024-08-17T20:10:00Z",
+          "isRead": false,
+          "isEdited": false
         }
       ]
     }
