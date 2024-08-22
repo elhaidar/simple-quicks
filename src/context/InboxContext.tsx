@@ -52,7 +52,15 @@ export const InboxProvider = ({ children }: { children: ReactNode }) => {
             ...chat.messages,
             repliedToMessageId
               ? {
-                  messageId: `msg_${chat.messages.length + 1}`,
+                  messageId: `msg_${
+                    (
+                      chat.messages.reduce(
+                        (acc, curr) =>
+                          Math.max(acc, parseInt(curr.messageId.split("_")[1])),
+                        1
+                      ) + 1
+                    )?.toString() || "1"
+                  }`,
                   senderId: USER_ID,
                   senderName: "John Doe",
                   content: message,
@@ -62,7 +70,15 @@ export const InboxProvider = ({ children }: { children: ReactNode }) => {
                   repliedToMessageId,
                 }
               : {
-                  messageId: `msg_${chat.messages.length + 1}`,
+                  messageId: `msg_${
+                    (
+                      chat.messages.reduce(
+                        (acc, curr) =>
+                          Math.max(acc, parseInt(curr.messageId.split("_")[1])),
+                        1
+                      ) + 1
+                    )?.toString() || "1"
+                  }`,
                   senderId: USER_ID,
                   senderName: "John Doe",
                   content: message,

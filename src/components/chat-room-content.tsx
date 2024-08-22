@@ -23,10 +23,10 @@ export function ChatRoomContent({
 
   return (
     <div className="pb-4">
-      <AnimatePresence>
-        {Array.from(setOfUniqueDates).map((date, index) => (
-          <div key={index} className="space-y-4">
-            <ChatDayDivider key={date} date={date} />
+      {Array.from(setOfUniqueDates).map((date, index) => (
+        <div key={index} className="space-y-4">
+          <ChatDayDivider key={date} date={date} />
+          <AnimatePresence>
             {chat?.messages
               .filter((message) => message.timestamp.split("T")[0] === date)
               .map((message) => (
@@ -55,15 +55,15 @@ export function ChatRoomContent({
                   chatId={chat.chatId}
                 />
               ))}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              ref={chatEndRef}
-              onViewportEnter={onViewportEnter}
-            />
-          </div>
-        ))}
-      </AnimatePresence>
+          </AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            ref={chatEndRef}
+            onViewportEnter={onViewportEnter}
+          />
+        </div>
+      ))}
     </div>
   );
 }

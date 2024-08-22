@@ -205,12 +205,6 @@ export function ChatRoom({ ...props }: ChatRoomProps) {
           chatEndRef={chatEndRef}
           onViewportEnter={newMessageOnViewportEnter}
         />
-        {/* <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          ref={chatEndRef}
-          onViewportEnter={newMessageOnViewportEnter}
-        /> */}
       </div>
       <div className={cn("absolute bottom-0 w-full")}>
         {anyUnreadMessages && (
