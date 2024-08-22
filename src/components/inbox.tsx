@@ -12,9 +12,7 @@ import { useEffect } from "react";
 interface InboxProps extends MotionProps {}
 
 const fetchData = async () => {
-  const response = await fetch("api/chat", {
-    cache: "no-cache",
-  });
+  const response = await fetch("api/chat");
   if (!response.ok) {
     throw new Error(
       `Error fetching data: ${response.status} ${response.statusText}`

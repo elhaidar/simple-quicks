@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
+export const revalidate = 0;
+
 export async function GET() {
   const jsonDirectory = path.join(process.cwd(), `/src/db.json`);
   const fileContents = await fs.readFile(jsonDirectory, "utf8");
