@@ -7,6 +7,21 @@ import { TaskContent } from "./task-content";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useTask } from "@/context/TaskContext";
+import MultipleSelector, { Option } from "./multiple-selector";
+
+const OPTIONS: Option[] = [
+  { label: "nextjs", value: "Nextjs" },
+  { label: "Vite", value: "vite", disable: true },
+  { label: "Nuxt", value: "nuxt", disable: true },
+  { label: "Vue", value: "vue, disable: true", disable: true },
+  { label: "Remix", value: "remix" },
+  { label: "Svelte", value: "svelte", disable: true },
+  { label: "Angular", value: "angular", disable: true },
+  { label: "Ember", value: "ember", disable: true },
+  { label: "React", value: "react" },
+  { label: "Gatsby", value: "gatsby", disable: true },
+  { label: "Astro", value: "astro", disable: true },
+];
 
 interface TaskProps extends MotionProps {}
 
@@ -63,6 +78,15 @@ export function Task({ ...props }: TaskProps) {
           )}
         </div>
       )}
+      <MultipleSelector
+        defaultOptions={OPTIONS}
+        placeholder="Select frameworks you like..."
+        emptyIndicator={
+          <p className="text-center text-lg leading-10 text-gray-600 dark:text-gray-400">
+            no results found.
+          </p>
+        }
+      />
     </motion.div>
   );
 }
